@@ -1,1 +1,1 @@
-# sales-analytics-platform
+# Sales Analytics Platform
