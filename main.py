@@ -24,6 +24,9 @@ def clean_data(df):
     # Convert date column to datetime
     df['order_date'] = pd.to_datetime(df['order_date'], errors='coerce')
 
+    # Remove duplicates
+    df.drop_duplicates(inplace=True)
+
     return df
 
 try:
