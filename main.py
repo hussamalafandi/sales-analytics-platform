@@ -1,5 +1,5 @@
 from analyzer import DataAnalyzer
-from utils import create_visualizations
+from utils import create_visualizations, export_summary_report
 
 def main():
     # Create an instance of DataAnalyzer
@@ -29,6 +29,10 @@ def main():
 
     # Create and save visualizations
     create_visualizations(analyzer, metrics)
+
+    # Print summary report
+    print("\n📋 Exporting Summary Report...")
+    export_summary_report(metrics)
 
 if __name__ == "__main__":
     main()

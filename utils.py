@@ -113,4 +113,23 @@ def create_visualizations(analyzer: DataAnalyzer, analytics: dict) -> None:
     plt.savefig("output/order_status_distribution.png", dpi=300, bbox_inches="tight")
     print("   ✅ Saved: order_status_distribution.png")
     plt.close()
+
+def export_summary_report(analytics: dict) -> None:
+    """Export a summary report as a text file"""
+    create_output_directory()
     
+    report_path = "output/summary_report.txt"
+    with open(report_path, "w") as f:
+        f.write("📊 Sales Analytics Summary Report\n")
+        f.write("="*40 + "\n\n")
+        
+        for key, value in analytics.items():
+            f.write(f"{key.replace('_', ' ').title()}:\n")
+            if isinstance(value, dict):
+                for sub_key, sub_value in value.items():
+                    f.write(f"   - {sub_key}: {sub_value}\n")
+            else:
+                f.write(f"   {value}\n")
+            f.write("\n")
+    
+    print(f"✅ Summary report saved: {report_path}")
