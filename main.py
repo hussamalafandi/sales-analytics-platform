@@ -1,15 +1,30 @@
-from analyzer import load_data, clean_data, analyze_data
+from analyzer import DataAnalyzer
 
-try:
-    df = load_data('./data/sales_data.csv')
-except FileNotFoundError:
-    exit(1)
+def main():
+    # Create an instance of DataAnalyzer
+    analyzer = DataAnalyzer()
+    
+    # Load data from CSV file
+    file_path = './data/sales_data.csv'  # Update with your actual file path
+    try:
+        df = analyzer.load_data(file_path)
+        print("Data loaded successfully.")
+    except FileNotFoundError:
+        return
+    
+    # Clean the data
+    cleaned_df = analyzer.clean_data()
+    print("Data cleaned successfully.")
+    
+    # Analyze the data and compute metrics
+    metrics = analyzer.analyze_data()
+    print("Data analysis completed. Key metrics:")
+    for key, value in metrics.items():
+        print(f"{key}: {value}")
 
-df = clean_data(df)
-print(df.info())
+    # Print analytized data
+    print("\nAnalytized Data:")
+    analyzer.print_analytics()
 
-print("Performing analysis...")
-analytics = analyze_data(df)
-print("\nAnalytics Results:")
-for key, value in analytics.items():
-    print(f"{key}: {value}")
+if __name__ == "__main__":
+    main()

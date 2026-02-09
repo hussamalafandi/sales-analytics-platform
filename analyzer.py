@@ -120,3 +120,41 @@ class DataAnalyzer:
         }
 
         return analytics
+    
+    def print_analytics(self):
+        """Print the analytics metrics in a readable format."""
+        analytics = self.analyze_data()
+
+        print("=== Sales Analytics ===")
+        print("="*60)
+
+        print(f"Total Revenue: ${analytics['total_revenue']:.2f}")
+        print(f"Average Order Value: ${analytics['average_order_value']:.2f}")
+        print(f"Customer Count: {analytics['customer_count']}")
+
+        print("\nRevenue by Category:")
+        for category, revenue in analytics['revenue_by_category'].items():
+            print(f"  {category}: ${revenue:.2f}")
+
+        print("\nTop 10 Customers by Lifetime Value:")
+        for customer_id, ltv in analytics['top_customers'].items():
+            print(f"  Customer {customer_id}: ${ltv:.2f}")
+            
+        print("\nOrder Status Distribution:")
+        for status, count in analytics['order_status_distribution'].items():
+            print(f"  {status}: {count} orders")
+        
+        print("\nMonthly Revenue Trends:")
+        for month, revenue in analytics["monthly_revenue"].items():
+            print(f"  {month}: ${revenue:.2f}")
+        
+        print("\nOutlier Orders:")
+        print(f"  Count: {analytics['outlier_orders']['count']}")
+        print(f"  Lower Bound: ${analytics['outlier_orders']['lower_bound']:.2f}")
+        print(f"  Upper Bound: ${analytics['outlier_orders']['upper_bound']:.2f}")
+        if analytics['outlier_orders']['count'] > 0:
+            print("  Outlier Details:")
+            for outlier in analytics['outlier_orders']['outlier_details']:
+                print(f"    Customer ID: {outlier['customer_id']}, Order Amount: ${outlier['order_amount']:.2f}, Category: {outlier['product_category']}, Status: {outlier['status']}")
+            
+        print("\n" + "="*60)
