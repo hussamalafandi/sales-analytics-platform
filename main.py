@@ -7,6 +7,10 @@ from utils import create_output_directory
 def create_visualizations(analyzer: DataAnalyzer, analytics: dict) -> None:
     """Create and save visualizations"""
     create_output_directory()
+
+    if analyzer.df is None:
+        print("No data available for visualization.")
+        return
     
     print("\n📊 Creating visualizations...")
     
